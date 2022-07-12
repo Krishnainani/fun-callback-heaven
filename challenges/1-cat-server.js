@@ -53,11 +53,44 @@ function fetchCatPics(array, callbackFunc) {
 }
 
 function fetchAllCats(callbackFunc) {
-  fetchAllOwners((err, ownerArray) => {});
+  fetchAllOwners((err, ownerArray) => {
+    let counter = ownerArray.length;
+    const catAndOwners = [];
+    for(owner of ownerArray){
+      fetchCatsByOwner(owner, (err, cats) => {
+        catAndOwners.push(...cats);
+        counter --;
+        if (counter === 0){
+          catAndOwners.sort();
+          callbackFunc(null, catAndOwners);
+        }
+    })
+    
+  }
+  })
 }
 
-function fetchOwnersWithCats() {}
+function fetchOwnersWithCats(callbackFunc) {
+  fetchAllOwners((err, ownerArray) => {
+    const catAndOwners = [];
+    for(let i=0; i< ownerArray.length; i++){
+      const catPairs = {};
+      catPairs.owner = ownerArray[i];
+      fetchCatsByOwner(ownerArray[i], (err, cats) => {
+        catPairs.cats = cats;
+        catAndOwners.push(catPairs);
+        if (catAndOwners.length === ownerArray.length){
+          console.log(catAndOwners);
+          // catAndOwners.sort();
+          callbackFunc(null, catAndOwners);
+        }
+      
+    })
+  
+  }
 
+  })
+}
 function kickLegacyServerUntilItWorks() {}
 
 function buySingleOutfit() {}
