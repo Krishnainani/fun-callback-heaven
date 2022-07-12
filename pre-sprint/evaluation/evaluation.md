@@ -16,7 +16,7 @@ fetchJoke('https://icandadjoke.com', function (error, joke) {
 ```
 
 a) What are the **arguments** being passed to `fetchJoke` ?</br></br>
-ans> A `'https://icandadjoke.com'`  and a function which console logs </br>
+ans> A `'https://icandadjoke.com'` and a function which console logs </br>
 b) How many **parameters** does `fetchJoke` have ?</br>
 ans> 2 </br>
 c) What are the **parameters** for `fetchJoke` ?</br>
@@ -42,5 +42,5 @@ const result = fs.readFile('hello.txt', 'utf8', function (error, files) {
 
 In the code above, someone is attempting to gain access to `files` by using a **return statement** inside the callback function. </br>
 
-What will `result` evaluate to in the snippet above and **why** ?
-How should someone gain access to the response from an **async function** like `fs.readFile` ? 
+What will `result` evaluate to in the snippet above and **why** ? undefined, because it is returned before the function is finished running
+How should someone gain access to the response from an **async function** like `fs.readFile` ? pass it through a callback function

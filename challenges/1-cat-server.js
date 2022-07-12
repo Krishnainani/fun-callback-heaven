@@ -1,16 +1,60 @@
 const request = require('../utils/server');
 
-function checkServerStatus() {}
+function checkServerStatus(callbackFunc) {
+  request('/status', (err, data) => {
+    callbackFunc(null, data);
+  });
+}
 
-function fetchBannerContent() {}
+function fetchBannerContent(callbackFunc) {
+  request('/banner', (err, banner) => {
+    const updatedBanner = { ...banner };
+    updatedBanner.copyrightYear = 2022;
+    callbackFunc(null, updatedBanner);
+  });
+}
 
-function fetchAllOwners() {}
+function fetchAllOwners(callbackFunc) {
+  request('/owners', (err, array) => {
+    const newOwners = array.map(owner => owner.toLowerCase());
+    callbackFunc(null, newOwners);
+  });
+}
 
-function fetchCatsByOwner() {}
+function fetchCatsByOwner(name, callbackFunc) {
+  request(`/owners/${name}/cats`, (err, array) => {
+    if (err) {
+      callbackFunc(err);
+    } else {
+      callbackFunc(null, array);
+    }
+  });
+}
 
-function fetchCatPics() {}
+function fetchCatPics(array, callbackFunc) {
+  const catpics = [];
 
-function fetchAllCats() {}
+  if (array.length === 0) {
+    callbackFunc(null);
+  }
+
+  for (catName of array) {
+    request(`/pics/${catName}`, (err, catpic) => {
+      if (err) {
+        catpics.push('placeholder.jpg');
+      } else {
+        catpics.push(catpic);
+      }
+      if (catpics.length === array.length) {
+        callbackFunc(null, catpics);
+      }
+    });
+  }
+}
+
+function fetchAllCats(callbackFunc) {
+  fetchAllOwners((err, ownerArray) => {});
+}
 
 function fetchOwnersWithCats() {}
 
