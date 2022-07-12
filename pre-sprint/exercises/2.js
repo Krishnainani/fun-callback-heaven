@@ -1,12 +1,11 @@
 const request = require('./request.js');
 
-function fetchJoke(link){
-    request(link, (err, joke) => {
-        console.log(joke.joke);
-    })
+function fetchJoke(link) {
+  request(link, (err, joke) => {
+    console.log(joke.joke);
+  });
 }
-fetchJoke('https://icanhazdadjoke.com/'
-)
+fetchJoke('https://icanhazdadjoke.com/');
 // Use request in order to fetch a joke from the following website 'https://icanhazdadjoke.com/'
 
 /* 
