@@ -1,6 +1,13 @@
 const fs = require('fs');
 
-function getJSFiles() {}
+function getJSFiles(directory, callBack) {
+fs.readdir(directory, (err, files) => {
+  if(err) {callBack(err);}
+  else{
+    const jsFiles = files.filter((file) => {return file.endsWith('js')})
+    callBack(null, jsFiles)}
+})
+}
 // Implement the function getJSFiles, it should take as arguments:
 // a directory (string)
 // a callback function

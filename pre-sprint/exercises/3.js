@@ -1,5 +1,14 @@
 const request = require('./request.js');
 
+function limitJokes(link, limit){
+    request(`${link}/search?limit=${limit}`, (err, data) => {
+        const jokes = data.results;
+        for (let i=0; i< jokes.length; i++){
+        console.log(jokes[i].joke);
+        }
+    })
+}
+limitJokes('https://icanhazdadjoke.com', 5);
 // Use request to make a request to 'https://icanhazdadjoke.com/search' in order to fetch a list of jokes
 
 // Print the list of jokes to the terminal using console.log

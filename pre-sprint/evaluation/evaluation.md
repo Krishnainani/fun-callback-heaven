@@ -16,11 +16,17 @@ fetchJoke('https://icandadjoke.com', function (error, joke) {
 ```
 
 a) What are the **arguments** being passed to `fetchJoke` ?</br></br>
-b) How many **parameters** does `fetchJoke` have ?</br></br>
-c) What are the **parameters** for `fetchJoke` ?</br></br>
-d) What are the **parameters** for the **2nd argument** of `fetchJoke`</br></br>
-e) Why is `fetchJoke` considered to be a higher order function ?</br></br>
-f) When should the function passed to fetchJoke be invoked ? <br></br>
+ans> A `'https://icandadjoke.com'`  and a function which console logs </br>
+b) How many **parameters** does `fetchJoke` have ?</br>
+ans> 2 </br>
+c) What are the **parameters** for `fetchJoke` ?</br>
+ans> A url and callBack</br>
+d) What are the **parameters** for the **2nd argument** of `fetchJoke`</br>
+ans> error and joke. </br>
+e) Why is `fetchJoke` considered to be a higher order function ?</br>
+ans> yes! as it is taking function as a parameter. </br>
+f) When should the function passed to fetchJoke be invoked ? <br>
+ans> its invoked when request doesnt return an error</br>
 
 ---
 
@@ -37,4 +43,4 @@ const result = fs.readFile('hello.txt', 'utf8', function (error, files) {
 In the code above, someone is attempting to gain access to `files` by using a **return statement** inside the callback function. </br>
 
 What will `result` evaluate to in the snippet above and **why** ?
-How should someone gain access to the response from an **async function** like `fs.readFile` ?
+How should someone gain access to the response from an **async function** like `fs.readFile` ? 
