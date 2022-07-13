@@ -73,27 +73,42 @@ function fetchAllCats(callbackFunc) {
 function fetchOwnersWithCats(callbackFunc) {
   fetchAllOwners((err, ownerArray) => {
     const catAndOwners = [];
+    let  count = 0;
     for(let i=0; i< ownerArray.length; i++){
       const catPairs = {};
       catPairs.owner = ownerArray[i];
       fetchCatsByOwner(ownerArray[i], (err, cats) => {
         catPairs.cats = cats;
-        catAndOwners.push(catPairs);
-        if (catAndOwners.length === ownerArray.length){
-          console.log(catAndOwners);
-          // catAndOwners.sort();
+        catAndOwners[i] = catPairs;
+        count++
+        if (count === ownerArray.length){
           callbackFunc(null, catAndOwners);
         }
-      
     })
-  
   }
-
   })
 }
-function kickLegacyServerUntilItWorks() {}
+function kickLegacyServerUntilItWorks(callback) {
+request('/legacy-status', (err, status) => {
+  if(err){kickLegacyServerUntilItWorks(callback);}
+  else{
+    callback(null, status);
+  }
+})
+}
 
-function buySingleOutfit() {}
+function buySingleOutfit(outfit, callback) {
+  let hasBeenInvoked = false;
+  request(`/outfits/${outfit}`, (err, purchase) => {
+    if(hasBeenInvoked === false){
+     hasBeenInvoked = true;
+    if(err){callback(err)}
+    else{
+    callback(null, purchase);
+    }
+   }
+  })
+}
 
 module.exports = {
   buySingleOutfit,
