@@ -235,7 +235,7 @@ describe('fetchAllCats()', () => {
   });
 });
 
-describe.only('fetchOwnersWithCats()', () => {
+describe('fetchOwnersWithCats()', () => {
   test('invokes the callback function with no error', done => {
     jest.setTimeout(1000);
 
@@ -254,7 +254,7 @@ describe.only('fetchOwnersWithCats()', () => {
     }
     fetchOwnersWithCats(testCB);
   });
-  test.only('invokes the callback function with the array of cat/owner objects in the origin order', done => {
+  test('invokes the callback function with the array of cat/owner objects in the origin order', done => {
     jest.setTimeout(1000);
 
     function testCB(err, owners) {

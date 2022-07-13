@@ -3,11 +3,11 @@ const fs = require('fs');
 const removeProject = require('./utils.js');
 
 //'remove the ".skip" on the describe to run the tests'
-describe.skip('project_generator', () => {
+describe.only('project_generator', () => {
   beforeEach(done => removeProject('my_new_project', done));
   afterAll(done => removeProject('my_new_project', done));
 
-  test('writes a new project with the specified name', done => {
+  test.only('writes a new project with the specified name', done => {
     projectGenerator('my_new_project', () => {
       fs.access('./my_new_project', fs.constants.F_OK, (err, stats) => {
         expect(err).toBe(null); // <-- will be null if directory exists
